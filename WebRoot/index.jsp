@@ -63,8 +63,9 @@ a,#queryShixin,#queryShixinLocal,img{
 
 			</form>
 
+			<%-- 
             <input type="text" placeholder="请填写企业名称" style="height:40px;width:510px;margin-top:10px;" name="entName" id="entName" value="">
-            <button style="height:40px;width:90px;" id="queryEntInfo" class="btn" type="button">查询</button>
+            <button style="height:40px;width:90px;" id="queryEntInfo" class="btn" type="button">查询</button>--%>
 		</div>
 
 		<!-- 查询结果 -->
