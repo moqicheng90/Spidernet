@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "http://mybatis.org/dtd/mybatis-3-mapper.dtd" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.wits.mqc.shixin.dao.LegalLostDao">
+  <cache/>
+  
+  <!-- 实体映射 -->
+  <resultMap type="LegalLost" id="lgLostMap">
+  	<id column="id" property="id"/>
+  	<result column="did" property="did"/>
+  	<result column="lgChkId" property="lgChkId"/>
+  	<result column="iname" property="iname"/>
+  	<result column="caseCode" property="caseCode"/>
+  	<result column="age" property="age"/>
+  	<result column="sexy" property="sexy"/>
+  	<result column="cardNum" property="cardNum"/>
+  	<result column="businessEntity" property="businessEntity"/>
+  	<result column="courtName" property="courtName"/>
+  	<result column="areaName" property="areaName"/>
+  	<result column="partyTypeName" property="partyTypeName"/> 	
+  	<result column="gistId" property="gistId"/>
+  	<result column="regDate" property="regDate"/>
+  	<result column="gistUnit" property="gistUnit"/>
+  	<result column="duty" property="duty"/>
+  	<result column="performance" property="performance"/>
+  	<result column="performedPart" property="performedPart"/>
+  	<result column="unperformPart" property="unperformPart"/>
+  	<result column="disruptTypeName" property="disruptTypeName"/>
+  	<result column="publishDate" property="publishDate"/>
+  </resultMap>
+  <select id="queryLegalLost" parameterType="Integer" resultMap="lgLostMap">
+  	select * from cust_lg_lost where did = #{did}
+  </select>
+  
+  <insert id="insertLegalLost" parameterType="LegalLost">
+	INSERT INTO cust_lg_lost 
+	<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="did != null">
+			did,
+		</if>
+		<if test="lgChkId != null">
+			lgChkId,
+		</if>
+		<if test="iname != null">
+			iname,
+		</if>
+		<if test="caseCode != null">
+			caseCode,
+		</if>
+		<if test="age != null">
+			age,
+		</if>
+		<if test="sexy != null">
+			sexy,
+		</if>
+		<if test="cardNum != null">
+			cardNum,
+		</if>
+		<if test="businessEntity != null">
+			businessEntity,
+		</if>
+		<if test="courtName != null">
+			courtName,
+		</if>
+		<if test="areaName != null">
+			areaName,
+		</if>
+		<if test="partyTypeName != null">
+			partyTypeName,
+		</if>
+		<if test="gistId != null">
+			gistId,
+		</if>
+		<if test="regDate != null">
+			regDate,
+		</if>
+		<if test="gistUnit != null">
+			gistUnit,
+		</if>
+		<if test="duty != null">
+			duty,
+		</if>
+		<if test="performance != null">
+			performance,
+		</if>
+		<if test="performedPart != null">
+			performedPart,
+		</if>
+		<if test="unperformPart != null">
+			unperformPart,
+		</if>
+		<if test="disruptTypeName != null">
+			disruptTypeName,
+		</if>
+		<if test="publishDate != null">
+			publishDate,
+		</if>
+		
+	</trim>
+	
+	<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="did != null">
+			#{did},
+		</if>
+		<if test="lgChkId != null">
+			#{lgChkId},
+		</if>
+		<if test="iname != null">
+			#{iname},
+		</if>
+		<if test="caseCode != null">
+			#{caseCode},
+		</if>
+		<if test="age != null">
+			#{age},
+		</if>
+		<if test="sexy != null">
+			#{sexy},
+		</if>
+		<if test="cardNum != null">
+			#{cardNum},
+		</if>
+		<if test="businessEntity != null">
+			#{businessEntity},
+		</if>
+		<if test="courtName != null">
+			#{courtName},
+		</if>
+		<if test="areaName != null">
+			#{areaName},
+		</if>
+		<if test="partyTypeName != null">
+			#{partyTypeName},
+		</if>
+		<if test="gistId != null">
+			#{gistId},
+		</if>
+		<if test="regDate != null">
+			#{regDate},
+		</if>
+		<if test="gistUnit != null">
+			#{gistUnit},
+		</if>
+		<if test="duty != null">
+			#{duty},
+		</if>
+		<if test="performance != null">
+			#{performance},
+		</if>
+		<if test="performedPart != null">
+			#{performedPart},
+		</if>
+		<if test="unperformPart != null">
+			#{unperformPart},
+		</if>
+		<if test="disruptTypeName != null">
+			#{disruptTypeName},
+		</if>
+		<if test="publishDate != null">
+			#{publishDate},
+		</if>
+	</trim>
+  </insert>
+  
+  <select id="queryLegalLostList" parameterType="Map" resultType="LegalLost">
+  	select iname,regDate,caseCode,did from cust_lg_lost
+  	<if test="iname != null">
+  	where iname like concat('%',#{iname},'%')
+  	</if>
+  	limit #{startIndex},#{perSize}
+  </select>
+  
+  <select id="queryLegalLostListSize" parameterType="java.lang.String" resultType="Integer">
+  	select count(1) from (select iname,regDate,caseCode,did from cust_lg_lost
+  	<if test="_parameter != null">
+  	where iname like concat('%',#{_parameter},'%')
+  	</if>
+  	) cll
+  </select>
+   
+</mapper>

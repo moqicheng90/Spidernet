@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "http://mybatis.org/dtd/mybatis-3-mapper.dtd" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.wits.mqc.entinfo.dao.EntInfoDao">
+  <cache/>
+  
+  <select id="queryEntBasicInfo" parameterType="java.lang.String" resultType="EntBasicInfo">
+  	  select * from ent_basic_info where entName = #{entName}
+  </select>
+  
+  <select id="queryChangeRecordsByEntID" parameterType="java.lang.Integer" resultType="ChangeRecord">
+  	  select * from ent_change_records where entID = #{entID}
+  </select>
+  
+  <select id="queryShareHolderInfosByEntID" parameterType="java.lang.Integer" resultType="ShareHolderInfo">
+  	  select * from ent_shareholder_info where entID = #{entID}
+  </select> 
+  
+  <insert id="insertEntBasicInfo" parameterType="EntBasicInfo"  useGeneratedKeys="true" keyProperty="id">
+	INSERT INTO ent_basic_info 
+	<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="entName != null">
+			entName,
+		</if>
+		<if test="businessRegistNo != null">
+			businessRegistNo,
+		</if>
+		<if test="organizationCode != null">
+			organizationCode,
+		</if>
+		<if test="creditCode != null">
+			creditCode,
+		</if>
+		<if test="entType != null">
+			entType,
+		</if>
+		<if test="taxpayerIdentificationNo != null">
+			taxpayerIdentificationNo,
+		</if>
+		<if test="industry != null">
+			industry,
+		</if>
+		<if test="businessTermFrom != null">
+			businessTermFrom,
+		</if>
+		<if test="businessTermEnd != null">
+			businessTermEnd,
+		</if>
+		<if test="approvalDate != null">
+			approvalDate,
+		</if>
+		<if test="registAuthority != null">
+			registAuthority,
+		</if>
+		<if test="registAddress != null">
+			registAddress,
+		</if>
+		<if test="entEngilshName != null">
+			entEngilshName,
+		</if>
+		<if test="businessScope != null">
+			businessScope,
+		</if>
+		<if test="entLegalPerson != null">
+			entLegalPerson,
+		</if>
+		<if test="entAddress != null">
+			entAddress,
+		</if>
+		<if test="entEmailAdress != null">
+			entEmailAdress,
+		</if>
+		<if test="entRegistCapital != null">
+			entRegistCapital,
+		</if>
+		<if test="entStatus != null">
+			entStatus,
+		</if>
+		<if test="entRegistDate != null">
+			entRegistDate,
+		</if>
+		<if test="entPhone != null">
+			entPhone,
+		</if>
+		
+	</trim>
+	
+	<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="entName != null">
+			#{entName},
+		</if>
+		<if test="businessRegistNo != null">
+			#{businessRegistNo},
+		</if>
+		<if test="organizationCode != null">
+			#{organizationCode},
+		</if>
+		<if test="creditCode != null">
+			#{creditCode},
+		</if>
+		<if test="entType != null">
+			#{entType},
+		</if>
+		<if test="taxpayerIdentificationNo != null">
+			#{taxpayerIdentificationNo},
+		</if>
+		<if test="industry != null">
+			#{industry},
+		</if>
+		<if test="businessTermFrom != null">
+			#{businessTermFrom},
+		</if>
+		<if test="businessTermEnd != null">
+			#{businessTermEnd},
+		</if>
+		<if test="approvalDate != null">
+			#{approvalDate},
+		</if>
+		<if test="registAuthority != null">
+			#{registAuthority},
+		</if>
+		<if test="registAddress != null">
+			#{registAddress},
+		</if>
+		<if test="entEngilshName != null">
+			#{entEngilshName},
+		</if>
+		<if test="businessScope != null">
+			#{businessScope},
+		</if>
+		<if test="entLegalPerson != null">
+			#{entLegalPerson},
+		</if>
+		<if test="entAddress != null">
+			#{entAddress},
+		</if>
+		<if test="entEmailAdress != null">
+			#{entEmailAdress},
+		</if>
+		<if test="entRegistCapital != null">
+			#{entRegistCapital},
+		</if>
+		<if test="entStatus != null">
+			#{entStatus},
+		</if>
+		<if test="entRegistDate != null">
+			#{entRegistDate},
+		</if>
+		<if test="entPhone != null">
+			#{entPhone},
+		</if>
+	</trim>
+  </insert>
+  
+  
+  <insert  id="insertShareHolderInfo" parameterType="ShareHolderInfo">
+  		INSERT INTO ent_shareholder_info 
+	<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="entID != null">
+			entID,
+		</if>
+		<if test="shareholder != null">
+			shareholder,
+		</if>
+		<if test="liSubConAm != null">
+			liSubConAm,
+		</if>
+		<if test="subConDate != null">
+			subConDate,
+		</if>
+		<if test="subConFormName != null">
+			subConFormName,
+		</if>
+		<if test="liAcConAm != null">
+			liAcConAm,
+		</if>
+		<if test="acConDate != null">
+			acConDate,
+		</if>
+		<if test="acConFormName != null">
+			acConFormName,
+		</if>
+		
+	</trim>
+	
+	<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="entID != null">
+			#{entID},
+		</if>
+		<if test="shareholder != null">
+			#{shareholder},
+		</if>
+		<if test="liSubConAm != null">
+			#{liSubConAm},
+		</if>
+		<if test="subConDate != null">
+			#{subConDate},
+		</if>
+		<if test="subConFormName != null">
+			#{subConFormName},
+		</if>
+		<if test="liAcConAm != null">
+			#{liAcConAm},
+		</if>
+		<if test="acConDate != null">
+			#{acConDate},
+		</if>
+		<if test="acConFormName != null">
+			#{acConFormName},
+		</if>
+	</trim>
+  </insert>
+  
+  <insert  id="insertChangeRecord" parameterType="ChangeRecord">
+  		INSERT INTO ent_change_records
+	<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="entID != null">
+			entID,
+		</if>
+		<if test="changeItem != null">
+			changeItem,
+		</if>
+		<if test="changeBefore != null">
+			changeBefore,
+		</if>
+		<if test="changeAfter != null">
+			changeAfter,
+		</if>
+		<if test="changeDate != null">
+			changeDate,
+		</if>
+		
+	</trim>
+	
+	<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="entID != null">
+			#{entID},
+		</if>
+		<if test="changeItem != null">
+			#{changeItem},
+		</if>
+		<if test="changeBefore != null">
+			#{changeBefore},
+		</if>
+		<if test="changeAfter != null">
+			#{changeAfter},
+		</if>
+		<if test="changeDate != null">
+			#{changeDate},
+		</if>
+	</trim>
+  </insert>
+   
+</mapper>

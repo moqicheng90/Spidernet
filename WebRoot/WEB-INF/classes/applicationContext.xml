@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+	http://www.springframework.org/schema/mvc
+	http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+	">
+	<!-- 使用mvc 一定要有 -->
+	<mvc:annotation-driven />
+	<context:component-scan base-package="com.wits.mqc.shixin,com.wits.mqc.entinfo"></context:component-scan>
+	
+	<!--  <context:property-placeholder location="classpath:db.properties"/>-->
+	<!-- 数据源 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" 
+		p:user="tuniucredit" 
+		p:driverClass="com.mysql.jdbc.Driver"
+		p:password="tuniucredit"
+		p:jdbcUrl="jdbc:mysql://172.31.68.31:3306/test?characterEncoding=utf-8">
+	</bean>
+	
+	<!-- session工厂 -->
+	<bean id="factoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="typeAliasesPackage" value="com.wits.mqc.shixin.entity,com.wits.mqc.entinfo.entity"></property>
+		
+	</bean>
+	
+	<!-- 事务管理器 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	<!-- 事务注解 -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+	<!-- 自动扫描接口和mapper文件的一个工具类 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="sqlSessionFactoryBeanName" value="factoryBean"></property>
+		<property name="basePackage" value="com.wits.mqc.shixin.dao,com.wits.mqc.entinfo.dao"></property>
+	</bean>
+	
+	
+	<!-- 事务属性 -->
+	<tx:advice id="txAdvice">
+		<tx:attributes>
+			<tx:method name="get*" read-only="true"/>
+		</tx:attributes>
+	</tx:advice>
+	
+	<!-- 切面配置 -->
+	<aop:config>
+		<aop:pointcut expression="execution(* com.wits.mqc.shixin.service.*.*(..))" id="point"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="point"/>		
+	</aop:config>
+	
+	<aop:config>
+		<aop:pointcut expression="execution(* com.wits.mqc.entinfo.service.*.*(..))" id="point1"/>
+		<aop:advisor advice-ref="txAdvice1" pointcut-ref="point1"/>
+	</aop:config>
+	<!-- 事务属性 -->
+	<tx:advice id="txAdvice1">
+		<tx:attributes>
+			<tx:method name="get*" read-only="true"/>
+		</tx:attributes>
+	</tx:advice>
+	
+	<!--
+	<import resource="classpath:task-quartz.xml"></import> -->
+	
+</beans>

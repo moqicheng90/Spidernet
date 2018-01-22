@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "http://mybatis.org/dtd/mybatis-3-mapper.dtd" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.wits.mqc.shixin.dao.LegalLostDao">
+  <cache/>
+  
+  <resultMap type="LegalLost" id="lgLostMap">
+  	<id column="id" property="id"/>
+  	<result column="did" property="did"/>
+  	<result column="lgChkId" property="lgChkId"/>
+  	<result column="iname" property="iname"/>
+  	<result column="cardNum" property="cardNum"/>
+  	<result column="businessEntity" property="businessEntity"/>
+  	<result column="court" property="court"/>
+  	<result column="province" property="province"/>
+  	<result column="basisCaseNo" property="basisCaseNo"/>
+  	<result column="filingDate" property="filingDate"/>
+  	<result column="caseNo" property="caseNo"/>
+  	<result column="basisCourt" property="basisCourt"/>
+  	<result column="duty" property="duty"/>
+  	<result column="perform" property="perform"/>
+  	<result column="concreteSituation" property="concreteSituation"/>
+  	<result column="releaseDate" property="releaseDate"/>
+  </resultMap>
+  <select id="queryLegalLost" parameterType="Integer" resultMap="lgLostMap">
+  	select * from cust_lg_lost where did = #{did}
+  </select>
+  
+  <insert id="insertLegalLost" parameterType="LegalLost">
+	INSERT INTO cust_lg_lost (did,lgChkId,iname,cardNum,
+	businessEntity,court,province,basisCaseNo,filingDate,caseNo,
+	basisCourt,duty,perform,concreteSituation,releaseDate)
+	VALUES (#{did},#{lgChkId},#{iname},
+	#{cardNum},#{businessEntity},#{court},#{province},
+	#{basisCaseNo},#{filingDate},#{caseNo},#{basisCourt},
+	#{duty},#{perform},#{concreteSituation},#{releaseDate}	
+	);
+  </insert>
+   
+</mapper>

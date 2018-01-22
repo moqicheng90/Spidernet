@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="Spidernet"
+  id="myeclipse.1505899738542"
+  context-root="/Spidernet"
+  j2ee-spec="5.0"
+  archive="Spidernet.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
